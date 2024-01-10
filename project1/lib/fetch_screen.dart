@@ -1,39 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class FetchScreen extends StatefulWidget {
+  const FetchScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Lab 12 Project 2',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
-      home: const HomePage(),
-    );
-  }
+  State<FetchScreen> createState() => _FetchScreenState();
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class _FetchScreenState extends State<FetchScreen> {
   final _textController = TextEditingController();
   final _firestore = FirebaseFirestore.instance;
   String _fetchedText = '';
@@ -56,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Project 2'),
+        title: const Text('Fetch Screen'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(11.0),
@@ -64,7 +40,7 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             const SizedBox(height: 180.0),
             const Text(
-              "The text from Firestore:",
+              "This is the saved text:",
               style: TextStyle(fontSize: 22.0),
             ),
             Text(
